@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.5.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@techstark/opencv-js": "4.7.0-release.1",
+    "framer-motion": "^10.3.0",
     "opencv-react": "^0.0.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@techstark/opencv-js": "4.7.0-release.1"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './App.css';
+
+
 import ImagePage from './pages/ImagePage';
 
 
@@ -9,7 +9,7 @@ import ImagePage from './pages/ImagePage';
 function App() {
  
   return (
-    <div className="App">
+    <div className='container'>
        
        <ImagePage/>
        
