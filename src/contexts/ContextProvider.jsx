@@ -7,12 +7,16 @@ const StateContext = createContext({
     size: null,
     cnv: false,
     video:null,
+    latitud:null,
+    longitud:null,
     setImageURL: ()=>{},
     setCanvasURL: ()=>{},
     setNum: ()=>{},
     setSize:()=>{},
     setCnv:()=>{},
     setVideo:()=>{},
+    setLatitud:()=>{},
+    setLongitud:()=>{},
 })
 
 export const ContextProvider = ({children})=>{
@@ -22,6 +26,8 @@ export const ContextProvider = ({children})=>{
     const [size, setSize] = useState();
     const [cnv, setCnv] = useState();
     const [video, setVideo] = useState();
+    const [latitud, setLatitud] = useState();
+    const [longitud, setLongitud] = useState();
 
     return(
         <StateContext.Provider value={{
@@ -31,12 +37,16 @@ export const ContextProvider = ({children})=>{
             size,
             cnv,
             video,
+            latitud,
+            longitud,
             setImageURL,
             setCanvasURL,
             setNum, 
             setSize, 
             setCnv, 
-            setVideo
+            setVideo,
+            setLatitud,
+            setLongitud
         }}       
         >
          {children}

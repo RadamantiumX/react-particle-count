@@ -65,6 +65,10 @@ body {
   cursor: pointer;
   
 }
+.locate-bar{
+  display: flex;
+  align-items: flex-start;
+}
 @media only screen and (max-device-width : 700px) {
   .web-cam{
       display: none;

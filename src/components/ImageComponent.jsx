@@ -25,6 +25,7 @@ export default function ImageComponent() {
         setNum(parseFloat(e.target.value));
    }
 
+   //Umbralizacion con OpenCV
     const onLoad=()=>{
         setCnv(true);
         const contours = new cv.MatVector();
@@ -62,6 +63,8 @@ export default function ImageComponent() {
         <div className="container">
          <a className="shadow p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Binarización</p></a>
          <div className="collapse" id="collapseExample">
+
+            {/* Input Number */}
             <NumberInput width={300} align="center" margin="auto" defaultValue={50} min={1} max={255} >
              <NumberInputField onChange={handleValue} />
              <NumberInputStepper>
@@ -69,6 +72,7 @@ export default function ImageComponent() {
                  <NumberDecrementStepper />
              </NumberInputStepper>
          </NumberInput> 
+         
          </div>
          
             </div>

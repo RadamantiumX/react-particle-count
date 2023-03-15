@@ -20,10 +20,12 @@ export default function CanvasComponent() {
 
     const canvasRef = useRef();
 
+    //Set 3rd value OpenCV method "threshold"
     const handleValue=(e)=>{
-        setNum(parseFloat(e.target.value));
+        setNum(parseFloat(e.target.value));//Only accept double type number
    }
 
+//Umbralizacion con OpenCV
     const onLoad=()=>{
         setCnv(true);
         const contours = new cv.MatVector();
@@ -62,6 +64,7 @@ export default function CanvasComponent() {
         setHistory([src, ...history]);*/
     }
 
+    //If the variable is set, execute the method
     useEffect(() => {
         if(canvasURL !== null){
            handleCapture(); 
@@ -76,6 +79,8 @@ export default function CanvasComponent() {
         <div className="container">
          <a className="shadow  p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Umbralización</p></a>
          <div className="collapse" id="collapseExample">
+
+            {/* Input Number */}
             <NumberInput width={300} align="center" margin="auto" defaultValue={50} min={1} max={255} >
              <NumberInputField onChange={handleValue} />
              <NumberInputStepper>
@@ -83,6 +88,7 @@ export default function CanvasComponent() {
                  <NumberDecrementStepper />
              </NumberInputStepper>
          </NumberInput> 
+         
          </div>
          
             </div>

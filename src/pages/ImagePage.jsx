@@ -5,11 +5,10 @@ import { useDisclosure } from '@chakra-ui/react';
 
 import Nube from '../assets/nube.png';
 import Cam from '../assets/web-cam.png';
-//import Engranaje from '../assets/engranaje.png';
 import Play from '../assets/play.png';
 import Cap from '../assets/camara.png';
 
-//Input number
+//Input number Chakra UI
 import {
     Button,
     Modal,
@@ -20,9 +19,12 @@ import {
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react';
-import { useStateContext } from "../contexts/ContextProvider"; 
+import { useStateContext } from "../contexts/ContextProvider";
+
+//Components
 import ImageComponent from "../components/ImageComponent";
 import CanvasComponent from "../components/CanvasComponent"; 
+import LocateComponent from "../components/LocateComponent";
 
 
 
@@ -81,6 +83,7 @@ export default function ImagePage (){
 
     return(
         <div className="header container text-center color-bg">
+            <LocateComponent/>
 
            <h1 className="display-3 mt-5">Detección de Microplásticos</h1>
                 
