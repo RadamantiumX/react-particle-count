@@ -1,22 +1,17 @@
 import React, { useRef, useState } from "react";
-import cv from "@techstark/opencv-js";
+
 import { useDisclosure } from '@chakra-ui/react';
 
 
 import Nube from '../assets/nube.png';
 import Cam from '../assets/web-cam.png';
-import Engranaje from '../assets/engranaje.png';
+//import Engranaje from '../assets/engranaje.png';
 import Play from '../assets/play.png';
 import Cap from '../assets/camara.png';
 
 //Input number
 import {
     Button,
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -25,27 +20,24 @@ import {
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react';
-  
+import { useStateContext } from "../contexts/ContextProvider"; 
+import ImageComponent from "../components/ImageComponent";
+import CanvasComponent from "../components/CanvasComponent"; 
 
 
-window.cv= cv;
 
 export default function ImagePage (){
 
-    const [imageURL, setImageURL] = useState(null);
-    const [num, setNum] = useState(50);
-    const [cnv, setCnv] = useState(false);
-    const [size, setSize] = useState(null);
-    const [video, setVideo] = useState();
+    const {setImageURL,setCanvasURL,canvasURL,imageURL,cnv,size} = useStateContext(); 
+    const [video, setVideo] = useState();   
+    const videoRef = useRef();
 
-
-    const imgRef = useRef();
-    
     const uploadRef = useRef();
 
     //WebCam button Modal
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+    //Imagen to URL
     const handleImage=(e)=>{
         const {files} = e.target;
 
@@ -57,44 +49,12 @@ export default function ImagePage (){
         }
     }
 
-    const handleValue=(e)=>{
-         setNum(parseFloat(e.target.value));
-    }
-
+   //Button switch whit input 
     const triggerUpload = ()=>{
         uploadRef.current.click();
     }
 
-    const onLoad=()=>{
-        setCnv(true);
-        const contours = new cv.MatVector();
-        const hierarchy = new cv.Mat();
-        
-
-        let mat = cv.imread(imgRef.current);
-        cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);
-        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY);
-        
-        cv.findContours(mat, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-
-        cv.cvtColor(mat, mat, cv.COLOR_GRAY2RGB)
-        
-        for (let i = 0; i < contours.size(); i++) {
-            const { m00, m01, m10 } = cv.moments(contours.get(i));
-            if (m00 === 0) continue;
-            const center = new cv.Point(m10 / m00, m01 / m00);
-            cv.circle(mat, center, 2, [0, 0, 0, 255], 6);
-            cv.circle(mat, center, 2, [0, 255, 0, 255], 2);
-        }
-
-        console.log(contours.size());
-        setSize(contours.size());
-        cv.imshow('canvas', mat);
-        mat.delete();
-
-
-    }
-
+    //Start web-cam view
     const rdyToUse=()=>{
         if (navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices
@@ -111,6 +71,12 @@ export default function ImagePage (){
             console.log("No tienes una camara disponible...");
           }
     }
+   
+    //Set Video capture variable
+    const setCapture=()=>{
+        setCanvasURL(videoRef.current);
+        
+    }
 
 
     return(
@@ -123,6 +89,7 @@ export default function ImagePage (){
                 <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
             </div>
 
+            {/* Modal Web-Cam */}
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -134,8 +101,8 @@ export default function ImagePage (){
                         width={ModalBody.width}
                         height={ModalBody.height}
                         autoPlay={true}
-                        >
-                            
+                        ref={videoRef}
+                        >      
                         </video>
                     </ModalBody>
 
@@ -144,32 +111,17 @@ export default function ImagePage (){
                             Cerrar
                         </Button>
                         <Button colorScheme='green' onClick={rdyToUse}><img src={Play} alt="play-icon" /> Iniciar</Button>
-                        <Button colorScheme='red'><img src={Cap} alt="cam-icon" /> Captura</Button>
+                        <Button colorScheme='red' onClick={setCapture}><img src={Cap} alt="cam-icon" /> Captura</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
                         
             <input className="input-img" type="file" accept="image/*" onChange={handleImage} ref={uploadRef}/>
-            {imageURL&& <div><img className="img-fluid rounded mx-auto d-block mt-2" src={imageURL} alt="image-test" ref={imgRef}/>
+
+            {imageURL&&<ImageComponent/>}
+            {canvasURL&&<CanvasComponent/>}
+         
             
-               <div className="container">
-                <a className="shadow  p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Umbralización</p></a>
-                <div className="collapse" id="collapseExample">
-                   <NumberInput  defaultValue={50} min={1} max={255} >
-                    <NumberInputField onChange={handleValue} />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput> 
-                </div>
-                
-                   </div>
-              <button className="btn btn-success mt-2 ml-2" onClick={onLoad}>Ejecutar</button>
-                
-            </div>}
-            
-                <canvas className="img-fluid rounded mx-auto d-block mt-2" id="canvas"></canvas>
                 
                 {cnv && <div className="shadow p-3 mb-5 bg-body-tertiary rounded"><span className="size-font">{size}</span> Objetos detectados <button className="btn btn-danger">Guardar Registro</button></div>}
                 

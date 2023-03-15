@@ -48,6 +48,8 @@ body {
 }
 .coll-cal{
   align-items: center;
+  width: 300px;
+  margin: auto;
   display: flex;
   background: linear-gradient(135deg,#4b99cc 20%,#5656b9 100%,#00d4ff 100%);
   color: #fff;
@@ -61,6 +63,7 @@ body {
 .coll-cal:hover{
   color: #000;
   cursor: pointer;
+  
 }
 @media only screen and (max-device-width : 700px) {
   .web-cam{
