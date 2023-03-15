@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import cv from "@techstark/opencv-js";
-import './ImagePage.css';
+
 
 import Nube from '../assets/nube.png';
 import Cam from '../assets/web-cam.png';
+import Engranaje from '../assets/engranaje.png';
+
 
 import {
     NumberInput,
@@ -79,38 +81,38 @@ export default function ImagePage (){
 
 
     return(
-        <div className="container text-center color-bg">
+        <div className="header container text-center color-bg">
 
            <h1 className="display-3 mt-5">Detección de Microplásticos</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
-                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" />Subir Imagen</button>
-                <button class="btn css-button-gradient--2" type="button"><img src={Cam} alt="cam-icon" />Usar WebCam</button>
+                <div class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" /><p>Subir Imagen</p></div>
+                <button class="btn css-button-gradient--2 web-cam" type="button"><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
             </div>
-                
-                
-            
-           
+                        
             <input className="input-img" type="file" accept="image/*" onChange={handleImage} ref={uploadRef}/>
             {imageURL&& <div><img className="img-fluid rounded mx-auto d-block mt-2" src={imageURL} alt="image-test" ref={imgRef}/>
               
                <div className="container">
-                <label>Calibrar Umbralización</label>
-                <NumberInput defaultValue={50} min={1} max={255} >
+                <a className="shadow  p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Umbralización</p></a>
+                <div className="collapse" id="collapseExample">
+                   <NumberInput  defaultValue={50} min={1} max={255} >
                     <NumberInputField onChange={handleValue} />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />
                     </NumberInputStepper>
-                </NumberInput>
+                </NumberInput> 
+                </div>
+                
                    </div>
-              <button className="btn btn-success mt-2 ml-2" onClick={onLoad}>Empezar</button>
+              <button className="btn btn-success mt-2 ml-2" onClick={onLoad}>Ejecutar</button>
                 
             </div>}
             
                 <canvas className="img-fluid rounded mx-auto d-block mt-2" id="canvas"></canvas>
                 
-                {cnv&& <div>{size}</div>}
+                {cnv && <div className="shadow p-3 mb-5 bg-body-tertiary rounded"><span className="size-font">{size}</span> Objetos detectados <button className="btn btn-danger">Guardar Registro</button></div>}
                 
         </div>
     )

@@ -1,6 +1,7 @@
 
-
+import React from 'react';
 import ImagePage from './pages/ImagePage';
+
 
 
 
@@ -9,11 +10,12 @@ import ImagePage from './pages/ImagePage';
 function App() {
  
   return (
-    <div className='container'>
+    <>
        
        <ImagePage/>
        
-    </div>
+       
+    </>
   )
 }
 
