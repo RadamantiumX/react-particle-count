@@ -1,19 +1,31 @@
 import React, { useRef, useState } from "react";
 import cv from "@techstark/opencv-js";
+import { useDisclosure } from '@chakra-ui/react';
 
 
 import Nube from '../assets/nube.png';
 import Cam from '../assets/web-cam.png';
 import Engranaje from '../assets/engranaje.png';
+import Play from '../assets/play.png';
+import Cap from '../assets/camara.png';
 
-
+//Input number
 import {
+    Button,
     NumberInput,
     NumberInputField,
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
-  } from '@chakra-ui/react'
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from '@chakra-ui/react';
+  
 
 
 window.cv= cv;
@@ -24,11 +36,15 @@ export default function ImagePage (){
     const [num, setNum] = useState(50);
     const [cnv, setCnv] = useState(false);
     const [size, setSize] = useState(null);
+    const [video, setVideo] = useState();
 
 
     const imgRef = useRef();
-    //const numRef = useRef();
+    
     const uploadRef = useRef();
+
+    //WebCam button Modal
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     const handleImage=(e)=>{
         const {files} = e.target;
@@ -79,6 +95,23 @@ export default function ImagePage (){
 
     }
 
+    const rdyToUse=()=>{
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices
+              .getUserMedia({ video: true })
+              .then((stream) => {
+                setVideo(document.getElementById("video-test"));
+                video.srcObject = stream;
+                console.log(stream);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else {
+            console.log("No tienes una camara disponible...");
+          }
+    }
+
 
     return(
         <div className="header container text-center color-bg">
@@ -86,13 +119,39 @@ export default function ImagePage (){
            <h1 className="display-3 mt-5">Detección de Microplásticos</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
-                <div class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" /><p>Subir Imagen</p></div>
-                <button class="btn css-button-gradient--2 web-cam" type="button"><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
+                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" /><p>Subir Imagen</p></button>
+                <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
             </div>
+
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Web-Cam</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <video 
+                        id="video-test"
+                        width={ModalBody.width}
+                        height={ModalBody.height}
+                        autoPlay={true}
+                        >
+                            
+                        </video>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                            Cerrar
+                        </Button>
+                        <Button colorScheme='green' onClick={rdyToUse}><img src={Play} alt="play-icon" /> Iniciar</Button>
+                        <Button colorScheme='red'><img src={Cap} alt="cam-icon" /> Captura</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
                         
             <input className="input-img" type="file" accept="image/*" onChange={handleImage} ref={uploadRef}/>
             {imageURL&& <div><img className="img-fluid rounded mx-auto d-block mt-2" src={imageURL} alt="image-test" ref={imgRef}/>
-              
+            
                <div className="container">
                 <a className="shadow  p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Umbralización</p></a>
                 <div className="collapse" id="collapseExample">
