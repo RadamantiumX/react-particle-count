@@ -10,11 +10,8 @@ import ImagePage from './pages/ImagePage';
 function App() {
  
   return (
-    <>
-       
-       <ImagePage/>
-       
-       
+    <>     
+       <ImagePage/>   
     </>
   )
 }

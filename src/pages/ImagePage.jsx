@@ -30,11 +30,16 @@ import LocateComponent from "../components/LocateComponent";
 
 export default function ImagePage (){
 
-    const {setImageURL,setCanvasURL,canvasURL,imageURL,cnv,size} = useStateContext(); 
+    const {setImageURL,setCanvasURL,canvasURL,imageURL,cnv,size,latitud,longitud} = useStateContext(); 
     const [video, setVideo] = useState();   
     const videoRef = useRef();
 
     const uploadRef = useRef();
+
+    //Para formulario
+    const sizeRef = useRef();
+    const latRef = useRef();
+    const lonRef = useRef();
 
     //WebCam button Modal
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -78,6 +83,9 @@ export default function ImagePage (){
     const setCapture=()=>{
         setCanvasURL(videoRef.current);
         
+    }
+    const onSubmit=()=>{
+
     }
 
 
@@ -124,9 +132,14 @@ export default function ImagePage (){
             {imageURL&&<ImageComponent/>}
             {canvasURL&&<CanvasComponent/>}
          
-            
+            <form className="hide-form" onSubmit={onSubmit}>
+                <input type="text" ref={sizeRef}/>
+                <input type="text" ref={lonRef} />
+                <input type="text" ref={latRef} />
+                <input type="submit" />
+            </form>
                 
-                {cnv && <div className="shadow p-3 mb-5 bg-body-tertiary rounded"><span className="size-font">{size}</span> Objetos detectados <button className="btn btn-danger">Guardar Registro</button></div>}
+                {cnv && <div className="shadow p-3 mb-5 bg-body-tertiary rounded"><span className="size-font">{size}</span> Objetos detectados <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Guardar Registro"><button className="btn btn-danger" >Guardar Registro</button></span></div>}
                 
         </div>
     )
