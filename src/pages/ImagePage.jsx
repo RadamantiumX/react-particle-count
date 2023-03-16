@@ -26,6 +26,8 @@ import ImageComponent from "../components/ImageComponent";
 import CanvasComponent from "../components/CanvasComponent"; 
 import LocateComponent from "../components/LocateComponent";
 
+import axiosClient from "../axios-cliente";
+import Swal from "sweetalert2";
 
 
 export default function ImagePage (){
@@ -84,8 +86,27 @@ export default function ImagePage (){
         setCanvasURL(videoRef.current);
         
     }
-    const onSubmit=()=>{
-
+    const onSubmit=(ev)=>{
+        ev.preventDefault();
+        if(!window.confirm("Se esta por guardar este registro con las coordenadas...Desea continuar?")){
+            return
+        }else{
+        const payload = {
+            size: sizeRef.current.value,
+            latitud: latRef.current.value,
+            longitud: lonRef.current.value
+        }
+        axiosClient.post('/datasend', payload)
+          .then(({data})=>{
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Registro Guardado',
+                showConfirmButton: false,
+                timer: 1500
+              })
+          })
+           }
     }
 
 
@@ -133,13 +154,20 @@ export default function ImagePage (){
             {canvasURL&&<CanvasComponent/>}
          
             <form className="hide-form" onSubmit={onSubmit}>
-                <input type="text" ref={sizeRef}/>
-                <input type="text" ref={lonRef} />
-                <input type="text" ref={latRef} />
+                
                 <input type="submit" />
             </form>
                 
-                {cnv && <div className="shadow p-3 mb-5 bg-body-tertiary rounded"><span className="size-font">{size}</span> Objetos detectados <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Guardar Registro"><button className="btn btn-danger" >Guardar Registro</button></span></div>}
+                {cnv &&<div className="shadow p-3 mb-5 bg-body-tertiary rounded wrap-content">
+                <form onSubmit={onSubmit}>
+                    <input type="hidden" ref={sizeRef} value={size} />
+                    <input type="hidden" ref={lonRef} value= {latitud} />
+                    <input type="hidden" ref={latRef} value={longitud}/>
+                    <span className="size-font">{size} </span>
+                    Objetos detectados
+                    <button className="btn btn-danger save-button" >Guardar Registro</button>
+                </form>
+                    </div>}
                 
         </div>
     )
