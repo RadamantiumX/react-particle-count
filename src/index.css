@@ -16,8 +16,9 @@ body {
   display: none;
 }
 .img-fluid{
-  width: 300px;
-  height: auto;
+  width: 500px;
+  height: 300px;
+
 }
 .size-font{
   font-weight: bold;

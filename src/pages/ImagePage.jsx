@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import { useDisclosure } from '@chakra-ui/react';
 
@@ -28,12 +28,14 @@ import LocateComponent from "../components/LocateComponent";
 
 import axiosClient from "../axios-cliente";
 import Swal from "sweetalert2";
+import { Link,Navigate } from "react-router-dom";
 
 
 export default function ImagePage (){
 
-    const {setImageURL,setCanvasURL,canvasURL,imageURL,cnv,size,latitud,longitud} = useStateContext(); 
-    const [video, setVideo] = useState();   
+    const {setImageURL,setCanvasURL,setDisplay,canvasURL,imageURL,cnv,size,latitud,longitud, display} = useStateContext(); 
+    const [video, setVideo] = useState();
+       
     const videoRef = useRef();
 
     const uploadRef = useRef();
@@ -46,6 +48,7 @@ export default function ImagePage (){
     //WebCam button Modal
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+
     //Imagen to URL
     const handleImage=(e)=>{
         const {files} = e.target;
@@ -53,8 +56,10 @@ export default function ImagePage (){
         if(files.length > 0){
             const url = URL.createObjectURL(files[0])
             setImageURL(url);
+            setDisplay(false);
         }else{
             setImageURL(null);
+            setDisplay(true);
         }
     }
 
@@ -84,6 +89,7 @@ export default function ImagePage (){
     //Set Video capture variable
     const setCapture=()=>{
         setCanvasURL(videoRef.current);
+        setDisplay(false);
         
     }
     const onSubmit=(ev)=>{
@@ -91,10 +97,10 @@ export default function ImagePage (){
         if(!window.confirm("Se esta por guardar este registro con las coordenadas...Desea continuar?")){
             return
         }else{
-        const payload = {
-            size: sizeRef.current.value,
+        const payload = {     
             latitud: latRef.current.value,
-            longitud: lonRef.current.value
+            longitud: lonRef.current.value,
+            objetos: sizeRef.current.value
         }
         axiosClient.post('/datasend', payload)
           .then(({data})=>{
@@ -105,20 +111,23 @@ export default function ImagePage (){
                 showConfirmButton: false,
                 timer: 1500
               })
+              
           })
            }
     }
+   
 
 
     return(
         <div className="header container text-center color-bg">
             <LocateComponent/>
-
+        {display&&<div>
            <h1 className="display-3 mt-5">Detección de Microplásticos</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
                 <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" /><p>Subir Imagen</p></button>
                 <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
+                <Link to="/data"><button className="btn btn-success">Historial</button></Link>
             </div>
 
             {/* Modal Web-Cam */}
@@ -147,7 +156,8 @@ export default function ImagePage (){
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-                        
+            </div>}   
+
             <input className="input-img" type="file" accept="image/*" onChange={handleImage} ref={uploadRef}/>
 
             {imageURL&&<ImageComponent/>}

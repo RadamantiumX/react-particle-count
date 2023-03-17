@@ -17,9 +17,17 @@ window.cv= cv;
 
 export default function ImageComponent() {
 
-    const {imageURL, num, setNum, setCnv, setSize} = useStateContext();
+    const {imageURL, num, setNum, setCnv, setSize, setImageURL, setCanvasURL, setDisplay} = useStateContext();
 
     const imgRef = useRef();
+
+    const handleBack=()=>{
+        setImageURL(null);
+        setCanvasURL(null);
+        setCnv(null);
+        setDisplay(true);
+        setNum(50);
+    }
 
     const handleValue=(e)=>{
         setNum(parseFloat(e.target.value));
@@ -58,7 +66,9 @@ export default function ImageComponent() {
     
     return(
         <>
-        <div><img className="img-fluid rounded mx-auto d-block mt-2" src={imageURL} alt="image-test" ref={imgRef}/>
+        <div>
+            <button className="btn btn-primary" onClick={handleBack}>Volver</button>
+            <img className="img-fluid rounded mx-auto d-block mt-5" src={imageURL} alt="image-test" ref={imgRef}/>
             
         <div className="container">
          <a className="shadow p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Binarización</p></a>

@@ -16,9 +16,17 @@ window.cv= cv;
 
 export default function CanvasComponent() {
 
-    const {canvasURL, num, setNum, setCnv, setSize} = useStateContext();
+    const {canvasURL, num, setNum, setCnv, setSize, setImageURL, setCanvasURL, setDisplay} = useStateContext();
 
     const canvasRef = useRef();
+
+    const handleBack=()=>{
+        setImageURL(null);
+        setCanvasURL(null);
+        setCnv(null);
+        setDisplay(true);
+        setNum(50);
+    }
 
     //Set 3rd value OpenCV method "threshold"
     const handleValue=(e)=>{
@@ -59,7 +67,7 @@ export default function CanvasComponent() {
     function handleCapture() {
         const cnv = document.getElementById("cnv");
         const ctx = cnv.getContext("2d");
-        ctx.drawImage(canvasURL, 0, 0, 200, 200);
+        ctx.drawImage(canvasURL,15,5,350,150);
         /*const src = cnv.toDataURL("image/jpeg", 1.0);
         setHistory([src, ...history]);*/
     }
@@ -74,7 +82,9 @@ export default function CanvasComponent() {
     
     return(
         <>
-        <div><canvas id="cnv" className="img-fluid rounded mx-auto d-block mt-2" ref={canvasRef}></canvas>
+        <div>
+             <button className="btn btn-primary" onClick={handleBack}>Volver</button>
+            <canvas id="cnv" className="img-fluid rounded mx-auto d-block mt-2" ref={canvasRef}></canvas>
             
         <div className="container">
          <a className="shadow  p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Umbralización</p></a>

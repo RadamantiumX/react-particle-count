@@ -9,6 +9,7 @@ const StateContext = createContext({
     video:null,
     latitud:null,
     longitud:null,
+    display: true,
     setImageURL: ()=>{},
     setCanvasURL: ()=>{},
     setNum: ()=>{},
@@ -17,10 +18,11 @@ const StateContext = createContext({
     setVideo:()=>{},
     setLatitud:()=>{},
     setLongitud:()=>{},
+    setDisplay: ()=>{}
 })
 
 export const ContextProvider = ({children})=>{
-    const [imageURL, setImageURL] = useState();
+    const [imageURL, setImageURL] = useState(null);
     const [canvasURL, setCanvasURL] = useState();
     const [num, setNum] = useState(50);
     const [size, setSize] = useState();
@@ -28,6 +30,7 @@ export const ContextProvider = ({children})=>{
     const [video, setVideo] = useState();
     const [latitud, setLatitud] = useState();
     const [longitud, setLongitud] = useState();
+    const [display, setDisplay] = useState(true)
 
     return(
         <StateContext.Provider value={{
@@ -39,6 +42,7 @@ export const ContextProvider = ({children})=>{
             video,
             latitud,
             longitud,
+            display,
             setImageURL,
             setCanvasURL,
             setNum, 
@@ -46,7 +50,8 @@ export const ContextProvider = ({children})=>{
             setCnv, 
             setVideo,
             setLatitud,
-            setLongitud
+            setLongitud,
+            setDisplay
         }}       
         >
          {children}
