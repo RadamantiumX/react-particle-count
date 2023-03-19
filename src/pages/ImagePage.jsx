@@ -19,6 +19,8 @@ import {
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react';
+
+import { TimeIcon, CheckIcon } from "@chakra-ui/icons";  
 import { useStateContext } from "../contexts/ContextProvider";
 
 //Components
@@ -27,13 +29,14 @@ import CanvasComponent from "../components/CanvasComponent";
 import LocateComponent from "../components/LocateComponent";
 
 import axiosClient from "../axios-cliente";
-import Swal from "sweetalert2";
-import { Link,Navigate } from "react-router-dom";
+import Home from '../assets/home.png';
+import { Link } from "react-router-dom";
 
 
 export default function ImagePage (){
-
-    const {setImageURL,setCanvasURL,setDisplay,canvasURL,imageURL,cnv,size,latitud,longitud, display} = useStateContext(); 
+    
+    //Contexts Variables
+    const {setImageURL,setCanvasURL,setDisplay,setNotification,canvasURL,imageURL,cnv,size,latitud,longitud, display,notification} = useStateContext(); 
     const [video, setVideo] = useState();
        
     const videoRef = useRef();
@@ -104,14 +107,7 @@ export default function ImagePage (){
         }
         axiosClient.post('/datasend', payload)
           .then(({data})=>{
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Registro Guardado',
-                showConfirmButton: false,
-                timer: 1500
-              })
-              
+            setNotification('Registro guardado con exito')
           })
            }
     }
@@ -120,14 +116,18 @@ export default function ImagePage (){
 
     return(
         <div className="header container text-center color-bg">
-            <LocateComponent/>
+            <div className="container">
+               <Link to="/"><Button><img src={Home} alt="home-icon"/>  Volver a Inicio</Button></Link>
+                <LocateComponent/>
+            </div>
+            
         {display&&<div>
-           <h1 className="display-3 mt-5">Detección de Microplásticos</h1>
+           <h1 className="display-4 mt-5">Selección de medio</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
                 <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" /><p>Subir Imagen</p></button>
                 <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
-                <Link to="/data"><button className="btn btn-success">Historial</button></Link>
+                <Link to="/data"><Button colorScheme='teal' leftIcon={<TimeIcon/>}>Historial</Button></Link>
             </div>
 
             {/* Modal Web-Cam */}
@@ -175,10 +175,12 @@ export default function ImagePage (){
                     <input type="hidden" ref={latRef} value={longitud}/>
                     <span className="size-font">{size} </span>
                     Objetos detectados
-                    <button className="btn btn-danger save-button" >Guardar Registro</button>
+                    <button className="btn btn-danger m-1" colorScheme='orange' >Guardar Registro</button>
                 </form>
                     </div>}
-                
+              {notification&&<div className="notification">
+                <CheckIcon/>{notification}
+                </div>}  
         </div>
     )
 }

@@ -1,7 +1,10 @@
 import React,{useEffect} from "react";
 import { useStateContext } from "../contexts/ContextProvider";
+import LocateIcon from '../assets/locate.png';
 
 export default function LocateComponent(){
+   
+  //Contexts Variables
     const {latitud, longitud, setLatitud, setLongitud} = useStateContext();
 
     const locate = ()=>{
@@ -41,7 +44,7 @@ export default function LocateComponent(){
         <>
         {latitud &&
         <div className="locate-bar">
-            <p>Ubicacion Actual: lat:{latitud}  lng:{longitud}</p>
+            <img src={LocateIcon} alt="icon-locate"/> <p>Ubicacion Actual: lat:{latitud}  lng:{longitud}</p>
         </div> 
         }
         </>

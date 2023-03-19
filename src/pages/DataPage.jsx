@@ -11,11 +11,14 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    Button,
   } from '@chakra-ui/react';
+
+import { ArrowBackIcon } from "@chakra-ui/icons";  
 
 export default function DataPage(){
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const getData = ()=>{
         setLoading(true);
@@ -36,7 +39,7 @@ export default function DataPage(){
     },[])
     return(
         <>
-        <div>
+        <div className="container mt-5 border rounded shadow">
             {loading && <div>Loading...</div>}
             <TableContainer>
                 <Table variant='striped' colorScheme='teal'>
@@ -65,7 +68,7 @@ export default function DataPage(){
                    
                 </Table>
             </TableContainer>
-           <Link to="/"><button className="btn">Volver</button></Link> 
+           <Link to="/media"><Button rightIcon={<ArrowBackIcon/>}>Volver</Button></Link> 
             </div>
         </>
     )

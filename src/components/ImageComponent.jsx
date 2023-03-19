@@ -10,13 +10,18 @@ import {
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
+    Button
    
   } from '@chakra-ui/react';
+
+  import { ArrowBackIcon, TriangleDownIcon } from "@chakra-ui/icons";
 
 window.cv= cv;
 
 export default function ImageComponent() {
 
+
+    //Contexts Variables
     const {imageURL, num, setNum, setCnv, setSize, setImageURL, setCanvasURL, setDisplay} = useStateContext();
 
     const imgRef = useRef();
@@ -67,7 +72,7 @@ export default function ImageComponent() {
     return(
         <>
         <div>
-            <button className="btn btn-primary" onClick={handleBack}>Volver</button>
+            <Button leftIcon={<ArrowBackIcon/>} onClick={handleBack}>Volver</Button>
             <img className="img-fluid rounded mx-auto d-block mt-5" src={imageURL} alt="image-test" ref={imgRef}/>
             
         <div className="container">
@@ -86,7 +91,7 @@ export default function ImageComponent() {
          </div>
          
             </div>
-       <button className="btn btn-success mt-2 ml-2" onClick={onLoad}>Ejecutar</button>
+       <Button className="mt-2" rightIcon={<TriangleDownIcon/>} colorScheme="green" onClick={onLoad}>Ejecutar</Button>
          
      </div>
      <canvas className="img-fluid rounded mx-auto d-block mt-2" id="canvas"></canvas>

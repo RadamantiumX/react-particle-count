@@ -10,6 +10,7 @@ const StateContext = createContext({
     latitud:null,
     longitud:null,
     display: true,
+    notification: null,
     setImageURL: ()=>{},
     setCanvasURL: ()=>{},
     setNum: ()=>{},
@@ -18,7 +19,8 @@ const StateContext = createContext({
     setVideo:()=>{},
     setLatitud:()=>{},
     setLongitud:()=>{},
-    setDisplay: ()=>{}
+    setDisplay: ()=>{},
+    setNotification:()=>{}
 })
 
 export const ContextProvider = ({children})=>{
@@ -31,6 +33,15 @@ export const ContextProvider = ({children})=>{
     const [latitud, setLatitud] = useState();
     const [longitud, setLongitud] = useState();
     const [display, setDisplay] = useState(true)
+    const [notification, _setNotification] = useState('');
+
+    //Setting Notification
+    const setNotification = (message)=>{
+        _setNotification(message);
+        setTimeout(()=>{
+            _setNotification('');
+        },5000)
+    }
 
     return(
         <StateContext.Provider value={{
@@ -43,6 +54,7 @@ export const ContextProvider = ({children})=>{
             latitud,
             longitud,
             display,
+            notification,
             setImageURL,
             setCanvasURL,
             setNum, 
@@ -51,7 +63,8 @@ export const ContextProvider = ({children})=>{
             setVideo,
             setLatitud,
             setLongitud,
-            setDisplay
+            setDisplay,
+            setNotification
         }}       
         >
          {children}

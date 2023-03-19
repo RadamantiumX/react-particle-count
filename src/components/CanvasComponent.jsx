@@ -3,7 +3,7 @@ import cv from "@techstark/opencv-js";
 import Engranaje from '../assets/engranaje.png';
 import { useStateContext } from "../contexts/ContextProvider";
 import {
-    
+    Button,
     NumberInput,
     NumberInputField,
     NumberInputStepper,
@@ -12,10 +12,13 @@ import {
    
   } from '@chakra-ui/react';
 
+import { ArrowBackIcon, TriangleDownIcon } from "@chakra-ui/icons";  
+
 window.cv= cv;
 
 export default function CanvasComponent() {
 
+    //Contexts variables
     const {canvasURL, num, setNum, setCnv, setSize, setImageURL, setCanvasURL, setDisplay} = useStateContext();
 
     const canvasRef = useRef();
@@ -83,7 +86,7 @@ export default function CanvasComponent() {
     return(
         <>
         <div>
-             <button className="btn btn-primary" onClick={handleBack}>Volver</button>
+           <Button leftIcon={<ArrowBackIcon/>} onClick={handleBack}>Volver</Button>
             <canvas id="cnv" className="img-fluid rounded mx-auto d-block mt-2" ref={canvasRef}></canvas>
             
         <div className="container">
@@ -102,7 +105,7 @@ export default function CanvasComponent() {
          </div>
          
             </div>
-       <button className="btn btn-success mt-2 ml-2" onClick={onLoad}>Ejecutar</button>
+         <Button className="mt-2" rightIcon={<TriangleDownIcon/>} colorScheme="green" onClick={onLoad}>Ejecutar</Button>
          
      </div>
 
