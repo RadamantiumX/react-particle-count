@@ -64,7 +64,7 @@ export default function ImageComponent() {
             let cx = moments.m10 / moments.m00;
             let cy = moments.m01 / moments.m00;
             
-            cv.putText(mat,`Obj: ${i+1}`, new cv.Point(cx,cy),cv.FONT_HERSHEY_SIMPLEX,0.3,[255,0,0,255],1);
+            cv.putText(mat,`${i+1}`, new cv.Point(cx,cy),cv.FONT_HERSHEY_SIMPLEX,0.3,[255,0,0,255],1);
         }
         
         console.log(contours.size());//Mostramos en consola
