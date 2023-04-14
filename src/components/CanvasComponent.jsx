@@ -36,7 +36,7 @@ export default function CanvasComponent() {
         setNum(parseFloat(e.target.value));//Only accept double type number
    }
 
-//Umbralizacion con OpenCV
+//Umbralizacion con OpenCV (IDEM en "ImageComponen" solo cambia el archivo de la imagen q es CANVAS)
     const onLoad=()=>{
         setCnv(true);
         const contours = new cv.MatVector();
@@ -52,15 +52,10 @@ export default function CanvasComponent() {
         cv.cvtColor(mat, mat, cv.COLOR_GRAY2RGB)
         
         for (let i = 0; i < contours.size(); i++) {
-            cv.drawContours(mat, contours, i,[255,0,0,255],1,cv.LINE_8,hierarchy,0);
-            /*const { m00, m01, m10 } = cv.moments(contours.get(i));
-            if (m00 === 0) continue;
-            const center = new cv.Point(m10 / m00, m01 / m00);
-            cv.circle(mat, center, 2, [0, 0, 0, 255], 6);
-            cv.circle(mat, center, 2, [0, 255, 0, 255], 2);*/
+            cv.drawContours(mat, contours, i,[255,0,0,255],1,cv.LINE_8,hierarchy,0);        
         }
-
         console.log(contours.size());
+        console.log(contours)
         setSize(contours.size());
         cv.imshow('canvas', mat);
         mat.delete();
@@ -72,8 +67,7 @@ export default function CanvasComponent() {
         const cnv = document.getElementById("cnv");
         const ctx = cnv.getContext("2d");
         ctx.drawImage(canvasURL,15,5,350,150);
-        /*const src = cnv.toDataURL("image/jpeg", 1.0);
-        setHistory([src, ...history]);*/
+        
     }
 
     //If the variable is set, execute the method

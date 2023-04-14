@@ -38,32 +38,38 @@ export default function ImageComponent() {
         setNum(parseFloat(e.target.value));
    }
 
-   //Umbralizacion con OpenCV
+   //Umbralizacion o Binarización con OpenCV
     const onLoad=()=>{
         setCnv(true);
-        const contours = new cv.MatVector();
-        const hierarchy = new cv.Mat();
+
+        //Definimos las variables
+        const contours = new cv.MatVector(); //Instanciamos el objeto MatVector
+        const hierarchy = new cv.Mat(); //Instanciamos el Objeto Mat
         
 
-        let mat = cv.imread(imgRef.current);
-        cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);
-        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY);
+        let mat = cv.imread(imgRef.current);//Tomamos la imagen de la variable "imgRef" y la leemos con la variable de la libreria OpenCv
+        cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);//Primero pasamos la imagen a escala de grises, utilizamos la propiedad e OpenCv COLOR_BGR2GRAY
+        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY); //Luego seguimod con el BINARIZADO de la imagen
         
-        cv.findContours(mat, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE)
+        cv.findContours(mat, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);//Buscamos los contornos de cada elemento distinto al color de fondo
 
-        cv.cvtColor(mat, mat, cv.COLOR_GRAY2RGB)
-        
+        cv.cvtColor(mat, mat, cv.COLOR_GRAY2RGB); 
+
+        //Recorremos los contornos y les dibujamos el borde
         for (let i = 0; i < contours.size(); i++) {
             cv.drawContours(mat, contours, i,[255,0,0,255],1,cv.LINE_8,hierarchy,0);
-           /* const { m00, m01, m10 } = cv.moments(contours.get(i));
-            if (m00 === 0) continue;
-            const center = new cv.Point(m10 / m00, m01 / m00);
-            cv.circle(mat, center, 2, [0, 0, 0, 255], 6);
-            cv.circle(mat, center, 2, [0, 255, 0, 255], 2);*/
+            let cnt = contours.get(i);
+            let sze = cv.contourArea(cnt);
+            let moments  = cv.moments(cnt);
+            let cx = moments.m10 / moments.m00;
+            let cy = moments.m01 / moments.m00;
+            
+            cv.putText(mat,`Obj: ${i+1}`, new cv.Point(cx,cy),cv.FONT_HERSHEY_SIMPLEX,0.3,[255,0,0,255],1);
         }
-
-        console.log(contours.size());
+        
+        console.log(contours.size());//Mostramos en consola
         setSize(contours.size());
+        
         cv.imshow('canvas', mat);
         mat.delete();
 
