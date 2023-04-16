@@ -17,10 +17,13 @@
     "@mui/styled-engine-sc": "^5.11.11",
     "@techstark/opencv-js": "4.7.0-release.1",
     "axios": "^1.3.4",
+    "bootstrap": "5.2.3",
     "framer-motion": "^10.3.0",
     "opencv-react": "^0.0.6",
     "react": "^18.2.0",
+    "react-bootstrap": "2.7.3",
     "react-dom": "^18.2.0",
+    "react-quick-pinch-zoom": "^4.6.0",
     "react-router-dom": "^6.9.0",
     "styled-components": "^5.3.9",
     "sweetalert2": "^11.4.8"

@@ -22,6 +22,15 @@ export default function CanvasComponent() {
     const {canvasURL, num, setNum, setCnv, setSize, setImageURL, setCanvasURL, setDisplay} = useStateContext();
 
     const canvasRef = useRef();
+    
+        //const [tooltip, setTooltip] = useState({});
+        const [canvasZoom, setCanvasZoom] = useState(null);
+
+        const[node, setNode] = useState(null)
+        
+        //Enable image JPG
+        const [enableImage, setEnableImage] = useState(true);
+    
 
     const handleBack=()=>{
         setImageURL(null);
@@ -34,11 +43,13 @@ export default function CanvasComponent() {
     //Set 3rd value OpenCV method "threshold"
     const handleValue=(e)=>{
         setNum(parseFloat(e.target.value));//Only accept double type number
+        setEnableImage(true);
    }
 
 //Umbralizacion con OpenCV (IDEM en "ImageComponen" solo cambia el archivo de la imagen q es CANVAS)
     const onLoad=()=>{
         setCnv(true);
+        setEnableImage(false);
         const contours = new cv.MatVector();
         const hierarchy = new cv.Mat();
         
@@ -52,7 +63,29 @@ export default function CanvasComponent() {
         cv.cvtColor(mat, mat, cv.COLOR_GRAY2RGB)
         
         for (let i = 0; i < contours.size(); i++) {
-            cv.drawContours(mat, contours, i,[255,0,0,255],1,cv.LINE_8,hierarchy,0);        
+            cv.drawContours(mat, contours, i,[255,0,0,255],1,cv.LINE_8,hierarchy,0); 
+            
+            let cnt = contours.get(i);
+            let sze = cv.contourArea(cnt);
+            let moments  = cv.moments(cnt);
+            let cx = moments.m10 / moments.m00;
+            let cy = moments.m01 / moments.m00;
+           
+            
+            //cv.putText(mat,`${i+1}:${sze.toFixed(2)}mm2`, new cv.Point(cx,cy),cv.FONT_HERSHEY_SIMPLEX,0.3,[255,0,0,255],1)
+            
+             
+            canvasZoom.addEventListener('click', (event) => {
+                const rect = canvasZoom.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+            
+                if (cv.pointPolygonTest(cnt, new cv.Point(x, y), false) > 0) {
+                  setNode(node.innerHTML=`Objeto:${i+1} Ø:${sze/100}mm²`);
+                  
+                }
+              });
         }
         console.log(contours.size());
         console.log(contours)
@@ -75,14 +108,16 @@ export default function CanvasComponent() {
         if(canvasURL !== null){
            handleCapture(); 
         }
+        setCanvasZoom(document.getElementById('canvas'))
+        setNode(document.getElementById('node'));
        
-    }, []);
+    }, [canvasZoom,node]);
     
     return(
         <>
         <div>
            <Button leftIcon={<ArrowBackIcon/>} onClick={handleBack}>Volver</Button>
-            <canvas id="cnv" className="img-fluid rounded mx-auto d-block mt-2" ref={canvasRef}></canvas>
+            {enableImage&&<canvas id="cnv" className="img-fluid rounded mx-auto d-block mt-2" ref={canvasRef}></canvas>}
             
         <div className="container">
          <a className="shadow  p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Umbralización</p></a>
@@ -103,8 +138,10 @@ export default function CanvasComponent() {
          <Button className="mt-2" rightIcon={<TriangleDownIcon/>} colorScheme="green" onClick={onLoad}>Ejecutar</Button>
          
      </div>
-
+     <div className="figure">
      <canvas className="img-fluid rounded mx-auto d-block mt-2" id="canvas"></canvas>
+     <div id="node"></div>
+     </div>
      </>
     )
 }

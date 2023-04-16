@@ -32,8 +32,9 @@ export const ContextProvider = ({children})=>{
     const [video, setVideo] = useState();
     const [latitud, setLatitud] = useState();
     const [longitud, setLongitud] = useState();
-    const [display, setDisplay] = useState(true)
+    const [display, setDisplay] = useState(true);
     const [notification, _setNotification] = useState('');
+    const [tags, setTags] = useState(false);
 
     //Setting Notification
     const setNotification = (message)=>{
@@ -55,6 +56,7 @@ export const ContextProvider = ({children})=>{
             longitud,
             display,
             notification,
+            tags,
             setImageURL,
             setCanvasURL,
             setNum, 
@@ -64,7 +66,8 @@ export const ContextProvider = ({children})=>{
             setLatitud,
             setLongitud,
             setDisplay,
-            setNotification
+            setNotification,
+            setTags
         }}       
         >
          {children}
