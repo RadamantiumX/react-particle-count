@@ -453,6 +453,24 @@ justify-content: space-between;
 
 
 /************************Responsive************************************/
+@media only screen and (max-device-width : 1900px){
+  .text-c{
+    height: 110vh;
+  }
+}
+@media only screen and (max-device-width : 1800px){
+  .info-mid{
+     height: 120vh;
+  }
+
+}
+
+@media only screen and (max-device-width : 1700px){
+  .info-mid{
+    height: 110vh;
+  }
+}
+
 @media only screen and (max-device-width : 1630px){
   .header-info{
     width: 60%;
@@ -467,13 +485,42 @@ justify-content: space-between;
   }
 }
 @media only screen and (max-device-width : 1400px){
+  .text-c{
+    height: 120vh;
+  }
   .mid-text{
     font-size: 20px;
   }
   .low-txt{
     font-size: 13px;
   }
+  .carousel-img{
+    width: 170px;
+    height: 170px;
+  }
+
+  .img-comp{
+    height: 100vh;
+    background-image: linear-gradient(to top, rgba(255, 255, 252, 0.5)0%,rgba(219, 219, 204, 0.7)100%);
+    
+  }
+  
+  .img-title{
+    font-size: 30px;
+    
+  }
+  .img-sample{
+    width: 400px;
+    height: auto;
+    
+  }
+
+
 }
+@media only screen and (max-device-width : 1350px) {
+    
+}
+
 @media only screen and (max-device-width : 1300px) {
   /*Home Page*/
   .sub-title{
@@ -492,6 +539,9 @@ justify-content: space-between;
   }
   .text-carousel{
     font-size: 20px;
+  }
+  .text-c{
+    height: 110vh;
   }
  /*Fin Home page*/
 
@@ -542,15 +592,7 @@ justify-content: space-between;
 }
  /*Fin Info Page*/
 }
-@media only screen and (max-device-width : 1000px) {
-  .text-content{
-      font-size: 15px;
-  }
-  .img-txt{
-    width: 200px;
-    height: auto;
-  }
-}
+
 @media only screen and (max-device-width : 828px){
   .example-img{
     margin-right: 250px;

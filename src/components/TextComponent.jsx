@@ -20,7 +20,7 @@ export default function TextComponent() {
                </div>
                <div className="box-2 text-box">
                   <p className="text-content">
-                  La automatización basada algoritmos propios y el uso de tecnología de aprendizaje automático le permite aumentar la cantidad de sus resultados y minimizar los esfuerzos manuales. En sus muestras se identifican el tamaño en área y la cantidad de partículas de 20 tipos de polímetros diferentes (incluidos los que se producen en mayor cantidad, y por lo tanto cubre un 97% de los microplásticos que se pueden encontrar en el medio ambiente). 
+                  La automatización de esta WPA se encuentra basada en algoritmos propios y el uso de tecnología de aprendizaje automático le permite maximizar  la cantidad de sus resultados y minimizar los esfuerzos manuales. En sus muestras se identificaran el tamaño en área y la cantidad de partículas de 20 tipos de polímetros diferentes (incluidos los que se producen en mayor cantidad, y por lo tanto cubre un 97% de los microplásticos que se pueden encontrar en el medio ambiente) 
                   </p>
                </div>
             </div>

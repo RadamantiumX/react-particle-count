@@ -5,6 +5,7 @@ import Spray from '../assets/spray.png';
 import Frame from '../assets/frame.png';
 import Ruler from '../assets/ruler.png';
 import Marco from '../assets/marco.png';
+import Abaco from '../assets/abaco.png';
 
 
 export default function IconsComponent() {
@@ -72,11 +73,25 @@ export default function IconsComponent() {
           
           <img
             className="carousel-img"
+            src={Abaco}
+            alt="First slide"
+          />
+          <p className="text-carousel">
+            5. Conteo de objetos detectados.
+          </p>
+       
+         </div>
+        </Carousel.Item>
+        <Carousel.Item>
+      <div className="carousel-box">
+          
+          <img
+            className="carousel-img"
             src={Marco}
             alt="First slide"
           />
           <p className="text-carousel">
-            5. Resultado rápido y eficaz a través de la WEP o bien accediendo a la WPA.
+            6. Resultado rápido y eficaz a través de la WEP o bien accediendo a la WPA.
           </p>
        
          </div>
