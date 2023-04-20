@@ -125,7 +125,7 @@ export default function ImagePage (){
            <h1 className="display-4 mt-5">Selección de medio</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
-                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" /><p>Subir Imagen</p></button>
+                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" />Subir Imagen</button>
                 <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
                 <Link to="/data"><Button colorScheme='teal' leftIcon={<TimeIcon/>}>Historial</Button></Link>
             </div>

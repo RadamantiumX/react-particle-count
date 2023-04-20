@@ -6,8 +6,10 @@ export default function HeaderComponent() {
     return(
         <header>
             <div className="contenedor head">
-                 <h1 className="titulo">Detección de objetos por imagenes</h1>
-                 <Link to='/media'><button className="btn-start"><span>Empezar</span></button></Link>
+                 <h1 className="titulo">Nuestra WEB Permite 
+Un flujo de Trabajo Intuitivo: Rápido, Fácil y Robusto
+</h1>
+                 <Link to='/media'><button className="btn-start"><i class="fa-solid fa-play"></i><span>Empezar</span></button></Link>
             </div>
         </header>
 
