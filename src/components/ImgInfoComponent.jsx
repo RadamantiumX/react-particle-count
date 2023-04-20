@@ -13,11 +13,11 @@ export default function ImgInfoComponent() {
             </div>
             <div className="example-img">
                 <img className="img-sample" src={Sample1} alt="microplastic image binary sample 1" />
-                <img className="img-sample" src={Sample2} alt="microplastic image binary sample 2" />
+                <img className="img-sample img-right" src={Sample2} alt="microplastic image binary sample 2" />
             </div>
             <div className="example-img one-line">
                 <img className="img-sample" src={Sample3} alt="microplastic image binary sample 3" />
-                <img className="img-sample" src={Sample4} alt="microplastic image binary sample 4" />
+                <img className="img-sample img-right" src={Sample4} alt="microplastic image binary sample 4" />
             </div>
         </div>
         </>

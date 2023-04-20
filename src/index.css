@@ -6,7 +6,7 @@
 	box-sizing: border-box;
    
 }
-
+/******************************************************************Home Page****************************************************/
 /*Header*/
 header{
   height: 70vh;
@@ -273,6 +273,7 @@ Aparece el menu de navegacion*/
 .img-txt{
   width: 300px;
   height: auto;
+  
 }
 /*End Text*/
 
@@ -322,7 +323,11 @@ Aparece el menu de navegacion*/
   font-weight: bold;
 }
 /*End Final*/
+/******************************************************Fin Home Page**********************************************************/
 
+
+
+/*****************************************************User Info Page**********************************************************/
 /*Info Header*/
 .info-header{
   height: 100vh;
@@ -383,6 +388,7 @@ justify-content: space-between;
 .low-img{
   width: 200px;
   height: 200px;
+  
 }
 .low-title{
   font-size: 35px;
@@ -397,12 +403,16 @@ justify-content: space-between;
   flex-direction: column;
   align-items: center;
 }
+.responsive{
+  display: none;
+}
 /*Fin Info Mid*/
 
 /*Info Img*/
 .img-comp{
   height: 100vh;
-  background-image: linear-gradient(to top, rgba(212, 226, 16, 0.5)0%,rgba(226, 212, 12, 0.7)100%);
+  background-image: linear-gradient(to top, rgba(255, 255, 252, 0.5)0%,rgba(219, 219, 204, 0.7)100%);
+  
 }
 .img-box-title{
   display: flex;
@@ -424,7 +434,7 @@ justify-content: space-between;
   align-content: center;
   margin: auto;
   margin-top: 30px;
-  padding: 20px;
+  padding-left: 20px;
 }
 .img-sample{
   margin: 10px;
@@ -439,12 +449,33 @@ justify-content: space-between;
   height: 20vh;
 }
 /*Fin Final Info*/
-
+/*****************************************************Fin User Info Page**********************************************************/
 
 
 /************************Responsive************************************/
+@media only screen and (max-device-width : 1630px){
+  .header-info{
+    width: 60%;
+  }
+}
+@media only screen and (max-device-width : 1505px){
+  .mid-text{
+    font-size: 22px;
+  }
+  .low-txt{
+    font-size: 15px;
+  }
+}
+@media only screen and (max-device-width : 1400px){
+  .mid-text{
+    font-size: 20px;
+  }
+  .low-txt{
+    font-size: 13px;
+  }
+}
 @media only screen and (max-device-width : 1300px) {
-
+  /*Home Page*/
   .sub-title{
       font-size: 25px;
   }
@@ -462,6 +493,54 @@ justify-content: space-between;
   .text-carousel{
     font-size: 20px;
   }
+ /*Fin Home page*/
+
+  /*Info Page*/
+  .title-info{
+    font-size: 30px;
+ 
+ }
+ .txt-info{
+ 
+   font-size: 17px;
+ }
+ .info-mid{
+  height: 100vh; 
+  
+}
+
+.mid-title{ 
+   font-size: 30px;  
+}
+.mid-text{
+  font-size: 13px;
+}
+.low-box{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 60%;
+  margin-top: 20px;
+}
+.low-img{
+  width: 180px;
+  height: 180px;
+  
+}
+.low-title{
+  font-size: 26px;
+}
+.low-txt{
+  font-size: 12px;
+}
+.btn-box{
+  margin-top: 10px;
+}
+.img-sample{
+  width: 300px;
+  height: auto;
+}
+ /*Fin Info Page*/
 }
 @media only screen and (max-device-width : 1000px) {
   .text-content{
@@ -472,12 +551,28 @@ justify-content: space-between;
     height: auto;
   }
 }
+@media only screen and (max-device-width : 828px){
+  .example-img{
+    margin-right: 250px;
+  }
+
+}
 @media only screen and (max-device-width : 760px) {
   .sub-title{
       font-size: 20px;
   }
+  .mid-text{
+    font-size: 12px;
+  }
+  .low-title{
+    font-size: 15px;
+  }
 }
-
+@media only screen and (max-device-width : 707px){
+    .low-txt{
+      font-size: 10px;
+    }
+}
 @media only screen and (max-device-width : 700px) {
   .web-cam{
       display: none;
@@ -485,6 +580,16 @@ justify-content: space-between;
   .text-content{
     font-size: 13px;
   }
+  .example-img{
+    margin-right: 300px;
+  }
+}
+@media only screen and (max-device-width : 650px){
+  .info-mid{
+    height: 120vh;
+  }
+
+
 }
 @media only screen and (max-device-width : 600px) {
   .text-carousel{
@@ -506,6 +611,18 @@ justify-content: space-between;
 		width: 40px;
 		height: 40px;
 	}
+  .responsive{
+    display: block;
+  }
+  .non-responsive{
+    display: none;
+  }
+  .low-box{
+    flex-direction: column;
+  }
+  .example-img{
+    flex-direction: column;
+  }
 }
 @media only screen and (max-device-width : 550px) {
   .items{
@@ -524,6 +641,30 @@ justify-content: space-between;
   }
   .box-1{
     margin-top: -30px;
+  }
+  
+
+  .title-info{
+    font-size: 20px;
+  }
+  .txt-info{
+    font-size: 14px;
+  }
+  .info-mid{
+    height: 150vh;
+  }
+  .container-mid{
+    flex-direction: column;
+  }
+  .img-title{
+    font-size: 20px;
+  }
+  .example-img{
+     margin-right: 100px;
+  }
+  .img-sample{
+    width: 270px;
+    height: auto;
   }
 }
 @media only screen and (max-device-width : 500px) {

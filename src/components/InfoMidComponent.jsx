@@ -19,12 +19,13 @@ export default function InfoMidComponent() {
             </div>
            </div>
            <div className="low-box">
+           <img className="low-img responsive" src={Calibre} alt="Calibre icon" /> 
             <div>
                 <h4 className="low-title">#Medición</h4>
                 <p className="low-txt">A continuación, las partículas de microplástico así identificadas se analizan en cuanto a la distancia más larga entre los píxeles de la partícula, lo que da como resultado la dimensión principal de la partícula. La dimensión menor se encuentra asumiendo que la forma de la partícula es una elipse y conociendo el área de la partícula en el escaneo o fotograma. Se supone que la tercera dimensión, el espesor, es 0,67 veces la dimensión menor. El volumen se calcula asumiendo que la partícula es un elipsoide. La masa se calcula a partir del volumen y la densidad del material plástico identificado.
               </p>
             </div>
-            <img className="low-img" src={Calibre} alt="Calibre icon" />           
+            <img className="low-img non-responsive" src={Calibre} alt="Calibre icon" />           
            </div>
            <div className="btn-box">
            <a className="btn-start" href="#img-info"><i class="fa-solid fa-plus"></i><span>Ver ejemplos...</span></a>
