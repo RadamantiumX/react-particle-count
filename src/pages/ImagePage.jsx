@@ -31,7 +31,7 @@ import LocateComponent from "../components/LocateComponent";
 import axiosClient from "../axios-cliente";
 import Home from '../assets/home.png';
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ImagePage (){
     
@@ -122,11 +122,11 @@ export default function ImagePage (){
             </div>
             
         {display&&<div>
-           <h1 className="display-4 mt-5">Selección de medio</h1>
+           <h1 className="media-title display-4 mt-5">Selección de medio</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
-                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><img src={Nube} alt="cloud-icon" />Subir Imagen</button>
-                <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><img src={Cam} alt="cam-icon" /><p>Usar WebCam</p></button>
+                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><i className="fa-solid fa-cloud-arrow-up"></i> Subir Imagen</button>
+                <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><i class="fa-solid fa-camera"></i> Captura con WebCam</button>
                 <Link to="/data"><Button colorScheme='teal' leftIcon={<TimeIcon/>}>Historial</Button></Link>
             </div>
 

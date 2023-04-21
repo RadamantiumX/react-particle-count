@@ -64,7 +64,7 @@ export default function ImageComponent() {
 
         let mat = cv.imread(imgRef.current);//Tomamos la imagen de la variable "imgRef" y la leemos con la variable de la libreria OpenCv
         cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);//Primero pasamos la imagen a escala de grises, utilizamos la propiedad e OpenCv COLOR_BGR2GRAY
-        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY); //Luego seguimod con el BINARIZADO de la imagen
+        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY_INV); //Luego seguimod con el BINARIZADO de la imagen
         
         cv.findContours(mat, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);//Buscamos los contornos de cada elemento distinto al color de fondo
 

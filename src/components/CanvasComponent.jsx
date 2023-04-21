@@ -56,7 +56,7 @@ export default function CanvasComponent() {
 
         let mat = cv.imread(canvasRef.current);
         cv.cvtColor(mat, mat, cv.COLOR_BGR2GRAY);
-        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY);
+        cv.threshold(mat, mat, num, 255, cv.THRESH_BINARY_INV);
         
         cv.findContours(mat, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE)
 
