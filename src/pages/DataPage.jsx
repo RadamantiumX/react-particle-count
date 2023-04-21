@@ -50,7 +50,7 @@ export default function DataPage(){
                             <Th>Latitud</Th>
                             <Th>Longitud</Th>
                             <Th>Cant. Obj.</Th>
-                            <Th>Fecha</Th>
+                            <Th>Fecha (AAAA-MM-DD)</Th>
                         </Tr>
                     </Thead>
                     {!loading&&<Tbody>

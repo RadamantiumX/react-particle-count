@@ -44,7 +44,7 @@ export default function LocateComponent(){
         <>
         {latitud &&
         <div className="locate-bar">
-           <i class="fa-solid fa-location-dot"></i> <p>Ubicacion Actual: lat:{latitud}  lng:{longitud}</p>
+           <i class="fa-solid fa-location-dot"></i> <p>  Ubicacion Actual: lat:{latitud}  lng:{longitud}</p>
         </div> 
         }
         </>

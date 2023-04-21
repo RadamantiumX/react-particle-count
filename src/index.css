@@ -38,7 +38,7 @@ header{
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: #f5f5f5; 
+  background-image: linear-gradient(to top, rgba(123, 163, 231, 0.5)0%,rgba(49, 167, 226, 0.7)100%); 
 }
 
 /*En Header*/
@@ -456,6 +456,9 @@ justify-content: space-between;
   font-weight: bold;
   border-top: solid 2px #2224ce;
 }
+.only-responsive{
+  display: none;
+}
 /******************************************************Fin Media Page*****************************************************************/
 
 /************************Responsive************************************/
@@ -523,9 +526,7 @@ justify-content: space-between;
 
 
 }
-@media only screen and (max-device-width : 1350px) {
-    
-}
+
 
 @media only screen and (max-device-width : 1300px) {
   /*Home Page*/
@@ -718,6 +719,14 @@ justify-content: space-between;
 @media only screen and (max-device-width : 500px) {
   .titulo{
       font-size: 30px;
+  }
+  .only-responsive{
+    display: block;
+  }
+  .icons-responsive{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 }
 @media only screen and (max-device-width : 460px) {

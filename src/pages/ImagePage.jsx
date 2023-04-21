@@ -125,7 +125,7 @@ export default function ImagePage (){
            <h1 className="media-title display-4 mt-5">Selección de medio</h1>
                 
             <div class="d-grid gap-2 col-6 mx-auto mt-5">
-                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><i className="fa-solid fa-cloud-arrow-up"></i> Subir Imagen</button>
+                <button class="btn css-button-gradient--2" type="button" onClick={triggerUpload}><div className="icons-responsive"><i class="only-responsive fa-solid fa-camera"></i><i className="fa-solid fa-cloud-arrow-up"></i></div> Subir Imagen</button>
                 <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><i class="fa-solid fa-camera"></i> Captura con WebCam</button>
                 <Link to="/data"><Button colorScheme='teal' leftIcon={<TimeIcon/>}>Historial</Button></Link>
             </div>
@@ -175,7 +175,7 @@ export default function ImagePage (){
                     <input type="hidden" ref={latRef} value={longitud}/>
                     <span className="size-font">{size} </span>
                     Objetos detectados
-                    <button className="btn btn-danger m-1" colorScheme='orange' >Guardar Registro</button>
+                    <button className="btn btn-danger m-1" colorScheme='orange' ><i class="fa-solid fa-floppy-disk"></i> Guardar Registro</button>
                 </form>
                     </div>}
               {notification&&<div className="notification">
