@@ -40,7 +40,7 @@ export default function DataPage(){
     return(
         <>
         <div className="container mt-5 border rounded shadow">
-            {loading && <div>Loading...</div>}
+            {loading && <div>Cargando datos, un momento por favor...</div>}
             <TableContainer>
                 <Table variant='striped' colorScheme='teal'>
                     <TableCaption>Imperial to metric conversion factors</TableCaption>
