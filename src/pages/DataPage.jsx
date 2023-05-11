@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axiosClient from "../axios-cliente";
 import { Link } from "react-router-dom";
+import { CSVLink } from "react-csv";
+import download from "downloadjs";
 
 import {
     Table,
@@ -26,12 +28,21 @@ export default function DataPage(){
         .then(({data})=>{
             setLoading(false);
             setData(data);
+            console.log(data.meta);
         })
         .catch(()=>{
             setLoading(false);
         })
 
          
+    }
+
+    const handleDownload = ()=>{
+        const csvString = data
+      .map((row) => row.join(','))
+      .join('\n');
+
+    download(csvString, 'datos.csv', 'text/csv');
     }
    
     useEffect(()=>{
@@ -40,10 +51,14 @@ export default function DataPage(){
     return(
         <>
         <div className="container mt-5 border rounded shadow">
+        <CSVLink data={data} filename="datos.csv">
+          <button className="btn btn-success"><i class="fa-solid fa-download"></i> Descargar CSV</button> 
+        </CSVLink>
+            
             {loading && <div>Cargando datos, un momento por favor...</div>}
             <TableContainer>
                 <Table variant='striped' colorScheme='teal'>
-                    <TableCaption>Imperial to metric conversion factors</TableCaption>
+                    
                     <Thead>
                         <Tr>
                             <Th>#</Th>
@@ -68,7 +83,7 @@ export default function DataPage(){
                    
                 </Table>
             </TableContainer>
-           <Link to="/media"><Button rightIcon={<ArrowBackIcon/>}>Volver</Button></Link> 
+           <Link to="/home"><Button rightIcon={<ArrowBackIcon/>}>Volver</Button></Link> 
             </div>
         </>
     )

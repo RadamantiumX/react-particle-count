@@ -4,6 +4,7 @@ import DataPage from "./pages/DataPage";
 import HomePage from "./pages/HomePage";
 import UserInfo from "./pages/UserInfo";
 import GuestLayout from "./layout/GuestLayout";
+import MapPage from "./pages/MapPage";
 
 const router = createBrowserRouter([
    {
@@ -21,10 +22,15 @@ const router = createBrowserRouter([
         {
             path:'/info',
             element: <UserInfo/>
-        }
-
+        },
+         {
+       path:'/map',
+       element: <MapPage/>
+   }
+       
     ]
    },
+   
    {
     path: '/media',
     element: <ImagePage/>
@@ -32,7 +38,8 @@ const router = createBrowserRouter([
    {
     path: '/data',
     element: <DataPage/>
-   }
+   },
+
   
 ])
 

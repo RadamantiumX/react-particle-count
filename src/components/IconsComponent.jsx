@@ -40,20 +40,7 @@ export default function IconsComponent() {
        
          </div>
       </Carousel.Item>
-      <Carousel.Item>
-      <div className="carousel-box">
-          
-          <img
-            className="carousel-img"
-            src={Frame}
-            alt="First slide"
-          />
-          <p className="text-carousel">
-            3. Conteo de las partículas de microplástico.
-          </p>
-       
-         </div>
-        </Carousel.Item>
+      
         <Carousel.Item>
       <div className="carousel-box">
           
@@ -63,7 +50,7 @@ export default function IconsComponent() {
             alt="First slide"
           />
           <p className="text-carousel">
-            4. Medición de las partículas a partir de fotogramas.
+            3. Medición de las partículas a partir de fotogramas.
           </p>
        
          </div>
@@ -77,7 +64,7 @@ export default function IconsComponent() {
             alt="First slide"
           />
           <p className="text-carousel">
-            5. Conteo de objetos detectados.
+            4. Conteo de objetos detectados.
           </p>
        
          </div>
@@ -91,7 +78,7 @@ export default function IconsComponent() {
             alt="First slide"
           />
           <p className="text-carousel">
-            6. Resultado rápido y eficaz a través de la WEP o bien accediendo a la WPA.
+            5. Resultado rápido y eficaz a través de la WEP o bien accediendo a la WPA.
           </p>
        
          </div>

@@ -9,7 +9,7 @@ export default function InfoMidComponent() {
             <div className="general-box">
             <div className="container-mid">
                 <h4 className="mid-title">Como Funciona?</h4>
-                <p className="mid-text">Por medio del uso de librerías de modelos pre entrenados en IA y la conjunción de algoritmos propios podemos establecer simplemente con una fotografía tomada instantáneamente desde un celular o microscopio o imágenes preexistentes determinar la cantidad de partículas que existen en ese fotograma además de su área.</p>
+                <p className="mid-text">Por medio del uso de librerías de modelos pre entrenados en IA y la conjunción de algoritmos propios podemos establecer simplemente utilizando una fotografía preexistente o tomada instantáneamente desde cualquier dispositivo que contenga una cámara como por ejemplo un celular o microscopio USB esta acción nos permitirá comprobar en pocos segundos la cantidad de partículas que existen en esa imagen además se podrá determinar el área de esas partículas.</p>
             </div>
            <div className="low-box">
             <img className="low-img" src={Clasif} alt="Classification icon" />

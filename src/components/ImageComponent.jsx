@@ -1,7 +1,7 @@
 import React,{useRef, useState, useEffect} from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 import cv from "@techstark/opencv-js";
-import Engranaje from '../assets/engranaje.png';
+import popup from '../assets/tooltip.jpg';
 
 import {
     
@@ -16,7 +16,8 @@ import {
    
   } from '@chakra-ui/react';
 
-
+  import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+  import Tooltip from 'react-bootstrap/Tooltip';
 
   import { ArrowBackIcon, TriangleDownIcon } from "@chakra-ui/icons";
 
@@ -37,7 +38,7 @@ export default function ImageComponent() {
     const[node, setNode] = useState(null)
     
     //Enable image JPG
-    const [enableImage, setEnableImage] = useState(true);
+    
 
     const handleBack=()=>{
         setImageURL(null);
@@ -49,13 +50,13 @@ export default function ImageComponent() {
 
     const handleValue=(e)=>{
         setNum(parseFloat(e.target.value));
-        setEnableImage(true);
+        
    }
 
    //Umbralizacion o Binarización con OpenCV
     const onLoad=()=>{
         setCnv(true);
-        setEnableImage(false);
+        
         
         //Definimos las variables
         const contours = new cv.MatVector(); //Instanciamos el objeto MatVector
@@ -116,10 +117,21 @@ export default function ImageComponent() {
         <>
             <div>
                 <Button leftIcon={<ArrowBackIcon />} onClick={handleBack}>Volver</Button>
-                {enableImage&&<img className="img-fluid rounded mx-auto d-block mt-5" src={imageURL} alt="image-test" ref={imgRef} />}
+                <img className="img-fluid rounded mx-auto d-block mt-5" src={imageURL} alt="image-test" ref={imgRef} />
 
                 <div className="container">
-                    <a className="shadow p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><img src={Engranaje} alt="icon-whell" /><p>Calibrar Binarización</p></a>
+                    
+                <OverlayTrigger
+         
+          placement="top"
+          overlay={
+            <Tooltip id="tooltip-top">
+              Ajuste de los parámetros para optimizar la detección de objetos en la imágen. Colocar valores numéricos entre 1 (Oscuro) al 255 (Claro) inclusive.
+            </Tooltip>
+          }
+        >
+
+                    <a className="shadow p-3 bg-body-tertiary rounded coll-cal mt-2" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa-solid fa-arrow-down"></i><p> Calibrar Binarización</p></a></OverlayTrigger>
                     <div className="collapse" id="collapseExample">
 
                         {/* Input Number */}
@@ -134,11 +146,32 @@ export default function ImageComponent() {
                     </div>
 
                 </div>
+                <OverlayTrigger
+         
+         placement="right"
+         overlay={
+           <Tooltip id="tooltip-right">
+             Empezar con la detección
+           </Tooltip>
+              }
+             >
                 <Button className="mt-2" rightIcon={<TriangleDownIcon />} colorScheme="green" onClick={onLoad}>Ejecutar</Button>
+                </OverlayTrigger>
 
             </div>
-            <div className="figure">          
+            <div className="figure"> 
+            <OverlayTrigger
+         
+         placement="top"
+         overlay={
+           <Tooltip id="tooltip-top-img">
+             Hacer clic en zona blanca para verificar diámetro.
+             <img src={popup} alt="img-tooltip"/>
+           </Tooltip>
+              }
+             >         
                <canvas className="img-fluid rounded mx-auto d-block mt-2" id="canvas" ref={canvasRef}></canvas>
+               </OverlayTrigger>
              <div id="node"></div>
             </div>
         </>

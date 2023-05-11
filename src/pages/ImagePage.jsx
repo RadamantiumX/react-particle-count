@@ -2,9 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 
 import { useDisclosure } from '@chakra-ui/react';
 
-
-import Nube from '../assets/nube.png';
-import Cam from '../assets/web-cam.png';
 import Play from '../assets/play.png';
 import Cap from '../assets/camara.png';
 
@@ -31,7 +28,9 @@ import LocateComponent from "../components/LocateComponent";
 import axiosClient from "../axios-cliente";
 import Home from '../assets/home.png';
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import StepsProgressMedia from "../components/StepsProgressMedia";
+
+
 
 export default function ImagePage (){
     
@@ -111,11 +110,18 @@ export default function ImagePage (){
           })
            }
     }
-   
 
+    //ReCaptcha
+    function onSubmited(token) {
+        document.getElementById("demo-form").submit();
+      }
+   
+  useEffect(()=>{
+ 
+  },[])
 
     return(
-        <div className="header container text-center color-bg">
+        <div className="media-page header container text-center color-bg">
             <div className="container">
                <Link to="/"><Button><img src={Home} alt="home-icon"/>  Volver a Inicio</Button></Link>
                 <LocateComponent/>
@@ -129,7 +135,7 @@ export default function ImagePage (){
                 <button class="btn css-button-gradient--2 web-cam" type="button" onClick={onOpen}><i class="fa-solid fa-camera"></i> Captura con WebCam</button>
                 <Link to="/data"><Button colorScheme='teal' leftIcon={<TimeIcon/>}>Historial</Button></Link>
             </div>
-
+              <StepsProgressMedia/>
             {/* Modal Web-Cam */}
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
@@ -162,20 +168,27 @@ export default function ImagePage (){
 
             {imageURL&&<ImageComponent/>}
             {canvasURL&&<CanvasComponent/>}
-         
+           
             <form className="hide-form" onSubmit={onSubmit}>
                 
                 <input type="submit" />
             </form>
-                
+               
                 {cnv &&<div className="shadow p-3 mb-5 bg-body-tertiary rounded wrap-content">
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} id="demo-form">
                     <input type="hidden" ref={sizeRef} value={size} />
                     <input type="hidden" ref={lonRef} value= {latitud} />
                     <input type="hidden" ref={latRef} value={longitud}/>
                     <span className="size-font">{size} </span>
-                    Objetos detectados
-                    <button className="btn btn-danger m-1" colorScheme='orange' ><i class="fa-solid fa-floppy-disk"></i> Guardar Registro</button>
+                    Cant. Objetos detectados
+                    <button 
+                        className="btn btn-danger m-1 g-recaptcha"
+                        colorScheme='orange'
+                        data-sitekey="reCAPTCHA_site_key"
+                        data-callback='onSubmited'
+                        data-action='submit'
+                    ><i class="fa-solid fa-floppy-disk"></i> Guardar Registro</button>
+                    
                 </form>
                     </div>}
               {notification&&<div className="notification">

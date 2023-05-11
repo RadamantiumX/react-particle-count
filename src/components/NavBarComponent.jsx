@@ -33,7 +33,7 @@ export default function NavBarComponent() {
                 <Link to="/media"> <a><i class="fa-solid fa-play"></i><span> Media</span></a></Link>
                 <Link to="/info"><a><i class="fa-solid fa-user"></i><span> Inf. al Usuario</span></a></Link>
                 <Link to="/data"><a><i class="fa-solid fa-database"></i><span> Datos</span></a></Link>
-                
+                <Link to="/map"><a><i class="fa-solid fa-map"></i><span> Mapa</span></a></Link>
        </nav>
       </>
 		 )
