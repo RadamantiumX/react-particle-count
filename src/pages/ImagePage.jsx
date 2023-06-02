@@ -32,6 +32,7 @@ import StepsProgressMedia from "../components/StepsProgressMedia";
 
 
 
+
 export default function ImagePage (){
     
     //Contexts Variables
@@ -46,10 +47,18 @@ export default function ImagePage (){
     const sizeRef = useRef();
     const latRef = useRef();
     const lonRef = useRef();
-
+    
     //WebCam button Modal
     const { isOpen, onOpen, onClose } = useDisclosure();
+    
+    //Captcha
+    const [SuccessMsg, setSuccessMsg] = useState("")
+    const [ErrorMsg, setErrorMsg] = useState("")
+   
 
+
+    
+    
 
     //Imagen to URL
     const handleImage=(e)=>{
@@ -94,31 +103,37 @@ export default function ImagePage (){
         setDisplay(false);
         
     }
-    const onSubmit=(ev)=>{
+    const onSubmitedForm=(ev)=>{
         ev.preventDefault();
+
+        
+        
+    
+
         if(!window.confirm("Se esta por guardar este registro con las coordenadas...Desea continuar?")){
             return
         }else{
         const payload = {     
             latitud: latRef.current.value,
             longitud: lonRef.current.value,
-            objetos: sizeRef.current.value
+            objetos: sizeRef.current.value,
+            
         }
         axiosClient.post('/datasend', payload)
           .then(({data})=>{
-            setNotification('Registro guardado con exito')
+            setNotification('Registro guardado con exito');
+           
+            
           })
            }
     }
 
-    //ReCaptcha
-    function onSubmited(token) {
-        document.getElementById("demo-form").submit();
-      }
    
-  useEffect(()=>{
+  
+
+            
+   
  
-  },[])
 
     return(
         <div className="media-page header container text-center color-bg">
@@ -169,26 +184,29 @@ export default function ImagePage (){
             {imageURL&&<ImageComponent/>}
             {canvasURL&&<CanvasComponent/>}
            
-            <form className="hide-form" onSubmit={onSubmit}>
+            <form className="hide-form" onSubmit={onSubmitedForm}>
                 
                 <input type="submit" />
             </form>
                
-                {cnv &&<div className="shadow p-3 mb-5 bg-body-tertiary rounded wrap-content">
-                <form onSubmit={onSubmit} id="demo-form">
+                {cnv &&<div className="form-box shadow p-3 mb-5 bg-body-tertiary rounded wrap-content">
+                <form onSubmit={onSubmitedForm} id="demo-form">
                     <input type="hidden" ref={sizeRef} value={size} />
                     <input type="hidden" ref={lonRef} value= {latitud} />
                     <input type="hidden" ref={latRef} value={longitud}/>
-                    <span className="size-font">{size} </span>
-                    Cant. Objetos detectados
-                    <button 
-                        className="btn btn-danger m-1 g-recaptcha"
-                        colorScheme='orange'
-                        data-sitekey="reCAPTCHA_site_key"
-                        data-callback='onSubmited'
-                        data-action='submit'
-                    ><i class="fa-solid fa-floppy-disk"></i> Guardar Registro</button>
                     
+                    Cant. Objetos detectados: 
+                    <span className="size-font">{size} </span>
+                    
+                    
+                    
+
+                    
+                    <button 
+                    type="submit"
+                        class="btn btn-danger m-1"
+                    ><i class="fa-solid fa-floppy-disk"></i> Guardar Registro</button>
+                   
                 </form>
                     </div>}
               {notification&&<div className="notification">
