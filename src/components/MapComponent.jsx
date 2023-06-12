@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import icon from './constants';
 import 'leaflet/dist/leaflet.css';
 import axiosClient from "../axios-cliente";
+import iconClean from "./icon-clean";
+import iconPlastic from "./icon-plastic";
 
 
 export default function MapComponent() {
@@ -21,6 +23,15 @@ export default function MapComponent() {
             setLoading(false);
         })
     }
+
+    const handleIcon =(cant)=>{
+        if (cant > 50){
+            return iconPlastic;
+        }else{
+            return iconClean;
+        }
+
+    }
     
 useEffect(()=>{
   getData();
@@ -34,7 +45,7 @@ useEffect(()=>{
                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {!loading&&<>{data.map(d=>(
-                    <Marker position={[d.longitud,d.latitud]} icon={icon}>
+                    <Marker position={[d.longitud,d.latitud]} icon={handleIcon(parseInt(d.objetos))}>
                         <Popup>
                             <div>
                                 <p>{d.created_at.substr(0,10)}</p>
