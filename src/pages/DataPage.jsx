@@ -3,6 +3,7 @@ import axiosClient from "../axios-cliente";
 import { Link } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import download from "downloadjs";
+//import Pagination from "react-js-pagination";
 
 import {
     Table,
@@ -21,14 +22,16 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 export default function DataPage(){
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    //const [metaData, setMetaData] = useState([]);
 
-    const getData = ()=>{
+    const getData = (pageNumber=1)=>{
         setLoading(true);
-        axiosClient.get('/image')
+        axiosClient.get(`/image?page=${pageNumber}`)
         .then(({data})=>{
             setLoading(false);
             setData(data);
-            console.log(data.meta);
+            //setMetaData(data.meta);
+            //console.log(data.meta);
         })
         .catch(()=>{
             setLoading(false);
@@ -56,7 +59,8 @@ export default function DataPage(){
         </CSVLink>
             
             {loading && <div>Cargando datos, un momento por favor...</div>}
-            <TableContainer>
+            {data.length === 0&&<div>No hay registros guardados aún...</div>}
+           {data.length !=0 && <TableContainer>
                 <Table variant='striped' colorScheme='teal'>
                     
                     <Thead>
@@ -82,7 +86,8 @@ export default function DataPage(){
                     </Tbody>}
                    
                 </Table>
-            </TableContainer>
+              
+            </TableContainer>}
            <Link to="/home"><Button rightIcon={<ArrowBackIcon/>}>Volver</Button></Link> 
             </div>
         </>

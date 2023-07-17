@@ -19,6 +19,9 @@ export default defineConfig({
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#000000',
+        workboxOptions: {
+          maximumFileSizeToCacheInBytes: 50000000, // <---- increasing the file size to cached 5mb
+        },
         icons: [
           {
             src: './src/assets/icon_page.png',

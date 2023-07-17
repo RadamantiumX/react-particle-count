@@ -412,7 +412,7 @@ justify-content: space-between;
 
 /*Info Img*/
 .img-comp{
-  height: 100vh;
+  height: 200vh;
   background-image: linear-gradient(to top, rgba(255, 255, 252, 0.5)0%,rgba(219, 219, 204, 0.7)100%);
   
 }
@@ -582,7 +582,7 @@ justify-content: space-between;
   }
 
   .img-comp{
-    height: 100vh;
+    height: 200vh;
     background-image: linear-gradient(to top, rgba(255, 255, 252, 0.5)0%,rgba(219, 219, 204, 0.7)100%);
     
   }
@@ -659,6 +659,9 @@ justify-content: space-between;
   height: 180px;
   
 }
+.img-comp{
+  height: 200vh;
+}
 .low-title{
   font-size: 26px;
 }
@@ -677,6 +680,9 @@ justify-content: space-between;
 @media only screen and (max-device-width : 900px){
   .media-page{
     height: 150vh;
+  }
+  .img-comp{
+    height: 200vh;
   }
 
 }
@@ -812,7 +818,7 @@ margin-top: -30px;
   height: auto;
 }
  .img-comp{
-   height: 120vh;
+   height: 220vh;
  } 
  
   .progressbar li {
